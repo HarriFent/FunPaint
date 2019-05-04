@@ -42,4 +42,6 @@ void Button::onClick(int x, int y)
 
 Button::~Button()
 {
+	delete img;
+	delete p;
 }

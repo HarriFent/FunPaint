@@ -8,6 +8,10 @@
 
 Properties* p = Properties::getProperties();
 
+void removeProp() {
+	delete p;
+}
+
 Shape* PencilClick(Shape* shp) {
 	return new ShapePencil(p->getPenColour(), p->getBackColour());
 }
@@ -18,8 +22,7 @@ Shape* RectangleClick(Shape* shp) {
 	return new ShapeRectangle(p->getPenColour(), p->getBackColour());
 }
 Shape* CircleClick(Shape* shp) {
-	shp = new ShapeCircle(p->getPenColour(), p->getBackColour());
-	return shp;
+	return new ShapeCircle(p->getPenColour(), p->getBackColour());
 }
 Shape* ColourClick(Shape* shp) {
 	//OutputDebugStringA("COLOUR\n");
@@ -67,9 +70,5 @@ Shape* LoadClick(Shape* shp) {
 }
 Shape* HelpClick(Shape* shp) {
 	OutputDebugStringA("HELP\n");
-	return shp;
-}
-Shape* ExitClick(Shape* shp) {
-	exit(0);
 	return shp;
 }

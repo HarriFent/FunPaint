@@ -8,6 +8,9 @@ class Properties
 public:
 
 	static Properties* getProperties();
+	
+	void removeProperties() { delete prop; };
+
 	~Properties();
 	int getBackColour() { return backColour; }
 	int getPenColour() { return penColour; }
@@ -28,7 +31,7 @@ private:
 
 	int backColour = 0xffffff, penColour = 0x000000;
 
-	Point prevMousePos;
+	Point prevMousePos = {0,0};
 
 	Shape* (*currentAction)(Shape*) = nullptr;
 };

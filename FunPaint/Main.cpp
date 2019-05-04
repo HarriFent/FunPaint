@@ -1,17 +1,14 @@
 #include <Windows.h>
 #include "Application.h"
 
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int show) {
 
-#ifdef _DEBUG
-	_CrtSetBreakAlloc(151);
-	_onexit(_CrtDumpMemoryLeaks);
-#endif
 
 	Application app;
 	app.create(hInstance, 900, 600, 40, true);
 
-
+	_CrtDumpMemoryLeaks();
 	return 0;
 }
 

@@ -15,15 +15,20 @@ void Application::onCreate() {
 
 
 Application::~Application() {
-	for (Component* shp : Canvas)
+	for (Component* shp : Canvas) {
+		shp = nullptr;
 		delete shp;
-	for (Component* comp : HUD)
+	}
+	for (Component* comp : HUD) {
+		comp = nullptr;
 		delete comp;
+	}
 	delete currentShape;
+	removeProp();
 }
 
 void Application::createHUD() {
-	for (int i = 0; i < 14; i++) {
+	for (int i = 0; i < 13; i++) {
 		int size = 60;
 		Rect r = { (i*(size + 1)) + 1,1,size,size };
 		Button* btn = nullptr;
@@ -42,7 +47,6 @@ void Application::createHUD() {
 		case SAVE: btn = new Button(r, L"imgs/imgSaveButton.bmp", &SaveClick, true); break;
 		case LOAD: btn = new Button(r, L"imgs/imgLoadButton.bmp", &LoadClick, true); break;
 		case HELP: btn = new Button(r, L"imgs/imgHelpButton.bmp", &HelpClick, true); break;
-		case EXIT: btn = new Button(r, L"imgs/imgExitButton.bmp", &ExitClick, true); break;
 		default: break;
 		}
 		btn->setButtonType((ButtonType)i);
