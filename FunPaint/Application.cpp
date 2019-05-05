@@ -8,23 +8,24 @@ Application::Application() {
 	createHUD();
 }
 
+Application::~Application() {}
+
 void Application::onCreate() {
 	EasyGraphics::onCreate();
 	::SetWindowText(getHWND(), L"OOPaint");
 }
 
-
-Application::~Application() {
+void Application::onDestroy()
+{
 	for (Component* shp : Canvas) {
-		shp = nullptr;
 		delete shp;
 	}
 	for (Component* comp : HUD) {
-		comp = nullptr;
 		delete comp;
 	}
 	delete currentShape;
 	removeProp();
+	EasyGraphics::onDestroy();
 }
 
 void Application::createHUD() {

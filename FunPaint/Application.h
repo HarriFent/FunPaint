@@ -13,6 +13,7 @@ public:
 private:
 	virtual void onDraw();
 	virtual void onCreate();
+	virtual void onDestroy();
 	virtual void onLButtonDown(UINT nFlags, int x, int y);
 	virtual void onLButtonUp(UINT nFlags, int x, int y);
 	virtual void onRButtonDown(UINT nFlags, int x, int y);

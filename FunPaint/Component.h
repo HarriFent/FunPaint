@@ -1,7 +1,6 @@
 #pragma once
 #include "EasyGraphics.h"
 #include "Global.h"
-//#include "Properties.h"
 
 class Component
 {
