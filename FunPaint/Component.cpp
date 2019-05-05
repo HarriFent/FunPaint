@@ -6,7 +6,7 @@ Component::~Component()
 }
 
 boolean Component::hitTest(int x, int y) {
-	Rect r = this->getRect();
+	Rect r = this->getResetRect();
 	if (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h) {
 		return true;
 	}
@@ -15,6 +15,10 @@ boolean Component::hitTest(int x, int y) {
 
 
 Rect Component::getRect() {
+	return rectangle;
+}
+
+Rect Component::getResetRect() {
 	Rect r = rectangle;
 	int x1 = r.x;
 	int y1 = r.y;

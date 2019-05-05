@@ -11,17 +11,25 @@ SelectionBox::SelectionBox(Rect r) : Component(r)
 
 SelectionBox::~SelectionBox()
 {
+	for (ShapeRectangle* btn : btns)
+		delete btn;
 }
 
 void SelectionBox::onClick(int x, int y)
 {
+	for (int i = 0; i < 4; i++) {
+		ShapeRectangle* btn = btns.at(i);
+		if (btn->hitTest(x, y)) {
+			dynamic_cast<Shape*>(comp)->setStatus(SCALE);
+			position = CornerPos(i);
+		}
+	}
 	
 }
 
 void SelectionBox::draw(EasyGraphics* g)
 {
-	Rect r = this->getRect();
-	r += 5;
+	Rect r = this->getResetRect();
 	r.transform(-1, -1);
 	g->setDotColour(g->clBlack, 1);
 	g->drawLine(r.x, r.y, r.x + r.w, r.y);
@@ -35,23 +43,19 @@ void SelectionBox::draw(EasyGraphics* g)
 
 void SelectionBox::update(Component* shp)
 {
-	Rect r = shp->getRect();
-	this->setRect(r);
-	for (int i = 0; i < 4; i++) {
-		ShapeRectangle* btn = btns.at(i);
-		switch (i) {
-		case 0:
-			btn->setRect({ r.x-5,r.y-5,10,10 });
-			break;
-		case 1:
-			btn->setRect({ r.x-5, r.y + r.h - 5,10,10 });
-			break;
-		case 2:
-			btn->setRect({ r.x + r.w - 5,r.y-5,10,10 });
-			break;
-		case 3:
-			btn->setRect({ r.x + r.w - 5,r.y + r.h - 5,10,10 });
-			break;
+	if (shp) {
+		comp = shp;
+		Rect r = shp->getResetRect();
+		r += 5;
+		this->setRect(r);
+		for (int i = 0; i < 4; i++) {
+			ShapeRectangle* btn = btns.at(i);
+			switch (i) {
+			case 0:	btn->setRect({ r.x,r.y,10,10 }); break;
+			case 1:	btn->setRect({ r.x, r.y + r.h - 10,10,10 }); break;
+			case 2:	btn->setRect({ r.x + r.w - 10,r.y,10,10 }); break;
+			case 3:	btn->setRect({ r.x + r.w - 10,r.y + r.h - 10,10,10 }); break;
+			}
 		}
 	}
 }

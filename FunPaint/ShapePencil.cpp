@@ -12,9 +12,9 @@ void ShapePencil::draw(EasyGraphics* g) {
 			g->drawLine(lastP.x, lastP.y, (*it_line).x, (*it_line).y);
 			lastP = *it_line;
 		}
-		Rect r = this->rectangle;
-		g->setPenColour(g->clRed, 2);
-		g->drawRectangle(r.x, r.y, r.w, r.h, false);
+		//Rect r = this->rectangle;
+		//g->setPenColour(g->clRed, 2);
+		//g->drawRectangle(r.x, r.y, r.w, r.h, false);
 	}
 }
 

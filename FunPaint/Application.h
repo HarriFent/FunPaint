@@ -5,6 +5,7 @@
 #include "Component.h"
 #include "Button.h"
 #include "Shape.h"
+#include "SelectionBox.h"
 
 class Application : public EasyGraphics {
 public:
@@ -31,5 +32,5 @@ private:
 	Properties* p = Properties::getProperties();
 
 	Shape* currentShape;
-	Component* selectionBox;
+	SelectionBox* selectionBox;
 };

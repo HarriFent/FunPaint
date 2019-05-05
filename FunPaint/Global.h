@@ -42,6 +42,20 @@ struct Rect {
 		x += dx;
 		y += dy;
 	}
+	void scale(int dx, int dy) {
+		x += dx;
+		y += dy;
+		w -= dx;
+		h -= dy;
+	}
+};
+
+enum CornerPos {
+	TOP_RIGHT,
+	BOTTOM_LEFT,
+	TOP_LEFT,
+	BOTTOM_RIGHT,
+	NONE
 };
 
 enum ButtonType {
@@ -58,7 +72,7 @@ enum ButtonType {
 	SAVE,
 	LOAD,
 	HELP,
-	NONE
+	NOBUTTOM
 };
 
 enum ShapeStatus {

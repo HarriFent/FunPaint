@@ -148,6 +148,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EasyGraphics.cpp" />
     <ClCompile Include="Global.cpp" />
+    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Properties.cpp" />
     <ClCompile Include="SelectionBox.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="EasyGraphics.h" />
     <ClInclude Include="Global.h" />
+    <ClInclude Include="Image.h" />
     <ClInclude Include="Properties.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SelectionBox.h" />

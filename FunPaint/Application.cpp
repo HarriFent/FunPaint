@@ -14,20 +14,20 @@ Application::~Application() {}
 void Application::onCreate() {
 	EasyGraphics::onCreate();
 	::SetWindowText(getHWND(), L"OOPaint");
-	selectionBox = new SelectionBox(Rect{0,0,0,0});
+	selectionBox = new SelectionBox(Rect{ 0,0,0,0 });
 }
 
 void Application::onDestroy()
 {
 	for (Component* shp : Canvas) {
-		shp->onDelete();
 		delete shp;
 	}
 	for (Component* comp : HUD) {
 		delete comp;
 	}
-	delete currentShape;
-	delete selectionBox;
+	if (selectionBox) {
+		delete selectionBox;
+	}
 	removeProp();
 	EasyGraphics::onDestroy();
 }
@@ -63,11 +63,11 @@ void Application::createHUD() {
 
 void Application::onDraw() {
 	this->clrscr(clWhite);
-	for (Component* shp : Canvas) 
+	for (Component* shp : Canvas)
 		shp->draw(this);
-	for (Component* comp : HUD) 
+	for (Component* comp : HUD)
 		comp->draw(this);
-	if(currentShape)
+	if (currentShape)
 		selectionBox->draw(this);
 	EasyGraphics::onDraw();
 }
@@ -76,29 +76,39 @@ void Application::onDraw() {
 void Application::onLButtonDown(UINT nFlags, int x, int y) {
 	p->setMousePos(x, y);
 	if (y > 60) {
-		Shape* shp = dynamic_cast<Shape*>(findObjFromClick(x, y));
-
-		if (p->hasAction()) {
-			shp = p->runAction(shp);
-			if (shp) {
-				Rect r = { x,y,0,0 };
-				switch (shp->getStatus()) {
-				case NEW:
-					shp->setRect(r);
-					Canvas.push_back(shp);
-					break;
-				case REMOVE:
-					Canvas.remove(shp);
-					delete shp;
-					shp = nullptr;
-					break;
-				default:
-					break;
-				}
-				
-			}
+		if (!selectionBox->hitTest(x, y))
+				currentShape = nullptr;
+		if (selectionBox && currentShape) {
+			currentShape = p->runAction(currentShape);
+			selectionBox->update(currentShape);
+			selectionBox->onClick(x, y);
 		}
-		currentShape = shp;
+		else {
+			Shape* shp = dynamic_cast<Shape*>(findObjFromClick(x, y));
+
+			if (p->hasAction()) {
+				shp = p->runAction(shp);
+				if (shp) {
+					Rect r = { x,y,0,0 };
+					switch (shp->getStatus()) {
+					case NEW:
+						shp->setRect(r);
+						Canvas.push_back(shp);
+						break;
+					case REMOVE:
+						Canvas.remove(shp);
+						delete shp;
+						shp = nullptr;
+						break;
+					default:
+						break;
+					}
+
+				}
+			}
+			currentShape = shp;
+			selectionBox->update(currentShape);
+		}
 	}
 	else {
 		for (it = HUD.begin(); it != HUD.end(); it++) {
@@ -119,12 +129,26 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 void Application::onLButtonUp(UINT nFlags, int x, int y)
 {
 	if(currentShape)
-		currentShape = nullptr;
+		switch (currentShape->getStatus()) {
+		case NEW:
+			if (ShapeLine * shp = dynamic_cast<ShapeLine*>(currentShape)) {}else {
+				currentShape->setRect(currentShape->getResetRect());
+			}
+			currentShape = nullptr;
+			break;
+		case MOVE:
+		case SCALE:
+			currentShape->setStatus(DEFAULT);
+			break;
+		default:
+			currentShape = nullptr;
+		}
 }
 
 void Application::onMouseMove(UINT nFlags, int x, int y)
 {
 	if (currentShape) {
+		Point old = p->getMousePos();
 		switch (currentShape->getStatus()) {
 		case NEW:
 			if (ShapePencil* shp = dynamic_cast<ShapePencil*>(currentShape)) {
@@ -135,12 +159,17 @@ void Application::onMouseMove(UINT nFlags, int x, int y)
 			}
 			break;
 		case MOVE:
-			Point old = p->getMousePos();
 			currentShape->movePos(x - old.x, y - old.y);
+			break;
+		case SCALE:
+			if (ShapePencil * shp = dynamic_cast<ShapePencil*>(currentShape)) {}
+			else {
+				currentShape->scale(x - old.x, y - old.y, selectionBox->getPosition());
+			}
 			break;
 		}
 		
-		dynamic_cast<SelectionBox*>(selectionBox)->update(currentShape);
+		selectionBox->update(currentShape);
 		onDraw();
 		p->setMousePos(x, y);
 	}

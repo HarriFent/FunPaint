@@ -26,6 +26,23 @@ public:
 	};
 
 	virtual void movePos(int dx, int dy) { rectangle.x += dx; rectangle.y += dy; };
+	virtual void scale(int dx, int dy, CornerPos pos) {
+		Rect r = rectangle;
+		switch (pos) {
+		case TOP_RIGHT:
+			r = {r.x += dx, r.y += dy, r.w -= dx, r.h -= dy};
+			break;
+		case BOTTOM_LEFT:
+			r = { r.x += dx, r.y, r.w -= dx, r.h += dy };
+			break;
+		case BOTTOM_RIGHT:
+			r = { r.x, r.y, r.w += dx, r.h += dy };
+			break;
+		case TOP_LEFT:
+			r = { r.x, r.y += dy, r.w += dx, r.h -= dy};
+		}
+		rectangle = r;
+	};
 
 protected:
 	int penColour;
