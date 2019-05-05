@@ -17,8 +17,7 @@ void Button::draw(EasyGraphics* g) {
 	}
 
 	if (selected) {
-		g->selectBackColour(g->clBlue);
-		g->setPenColour(g->clBlue, 3);
+		g->setPenColour(g->clRed, 3);
 		g->drawRectangle(r.x, r.y, r.w, r.h, false);
 	}
 }

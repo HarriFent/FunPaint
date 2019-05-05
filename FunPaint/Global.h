@@ -16,6 +16,7 @@
 
 int getColourDialog(int col);
 
+const int PEN_WIDTH = 2;
 
 struct Point { int x; int y; };
 
@@ -29,6 +30,17 @@ struct Rect {
 		if (x == obj.x && y == obj.y && w == obj.w && h == obj.h)
 			return true;
 		return false;
+	}
+
+	void operator += (int i) {
+		x -= i;
+		y -= i;
+		w += i * 2;
+		h += i * 2;
+	}
+	void transform(int dx, int dy) {
+		x += dx;
+		y += dy;
 	}
 };
 

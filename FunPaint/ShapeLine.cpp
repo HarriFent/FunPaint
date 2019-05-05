@@ -15,7 +15,7 @@ ShapeLine::~ShapeLine()
 void ShapeLine::draw(EasyGraphics * g)
 {
 	Rect r = this->rectangle;
-	g->setPenColour(this->penColour, 3);
+	g->setPenColour(this->penColour, PEN_WIDTH);
 	g->drawLine(x1, y1, x2, y2);
 
 }

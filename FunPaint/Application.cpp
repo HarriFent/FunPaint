@@ -67,7 +67,8 @@ void Application::onDraw() {
 		shp->draw(this);
 	for (Component* comp : HUD) 
 		comp->draw(this);
-	
+	if(currentShape)
+		selectionBox->draw(this);
 	EasyGraphics::onDraw();
 }
 

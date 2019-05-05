@@ -57,8 +57,8 @@ public:
 
   // Enhanced methods
   void setPenColour(int colour, int penwidth);  //set the colour to be used for line drawing along with pen width (there is a platform-dependent limit on the thickness)
+  void setDotColour(int colour, int penwidth);  //set the colour to be used for line drawing along with pen width (there is a platform-dependent limit on the thickness)
   void drawLine(int x1, int y1, int x2, int y2);//draws a line between {x1, y1} and {x2, y2}
-  void drawDotLine(int x1, int y1, int x2, int y2);//draws a line between {x1, y1} and {x2, y2}
   void drawRectangle(int x, int y, int width, int height, bool fill); // fills with back colour, outlines with pen
   void drawCircle(int x, int y, int radius, bool fill); // Draws a circle centred on {x, y} with a given radius; fills with back colour, outlines with pen
   void drawEllipse(int x, int y, int w, int h, bool fill);
@@ -242,6 +242,14 @@ inline void EasyGraphics::setPenColour(int colour, int penwidth)
   LOGPEN pen={PS_SOLID,{penwidth, 0}, (DWORD) colour};
   hpen=pencache.getTool(pen)->getHPEN();
   ::SelectObject(hdcback, hpen);
+}
+
+inline void EasyGraphics::setDotColour(int colour, int penwidth)
+{
+	//LOGPEN pen = {PS_DASH,{penwidth, 0}, (DWORD)colour };
+	//hpen = pencache.getTool(pen)->getHPEN();
+	hpen = CreatePen(PS_DOT, penwidth, (DWORD)colour);
+	::SelectObject(hdcback, hpen);
 }
 
 inline void EasyGraphics::selectBackColour(int colour) { hbrush=brushcache.getTool(colour)->getHBRUSH(); ::SelectObject(hdcback, hbrush); }
