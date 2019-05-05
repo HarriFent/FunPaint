@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Global.h"
 #include "ButtonFunctions.h"
+#include "SelectionBox.h"
 
 
 Application::Application() {
@@ -13,6 +14,7 @@ Application::~Application() {}
 void Application::onCreate() {
 	EasyGraphics::onCreate();
 	::SetWindowText(getHWND(), L"OOPaint");
+	selectionBox = new SelectionBox(Rect{0,0,0,0});
 }
 
 void Application::onDestroy()

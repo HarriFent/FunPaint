@@ -9,6 +9,6 @@ public:
 	~SelectionBox();
 
 	void onClick(int x, int y);
-	void onDraw(EasyGraphics* g);
+	void draw(EasyGraphics* g);
 };
 

@@ -16,7 +16,7 @@ void SelectionBox::onClick(int x, int y)
 	
 }
 
-void SelectionBox::onDraw(EasyGraphics* g)
+void SelectionBox::draw(EasyGraphics* g)
 {
 
 }

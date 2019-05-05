@@ -31,4 +31,5 @@ private:
 	Properties* p = Properties::getProperties();
 
 	Shape* currentShape;
+	Component* selectionBox;
 };
