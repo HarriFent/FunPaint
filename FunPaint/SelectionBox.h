@@ -10,5 +10,8 @@ public:
 
 	void onClick(int x, int y);
 	void draw(EasyGraphics* g);
+	void update(Component* shp);
+
+	void setRect(Rect r) { rectangle = r; }
 };
 

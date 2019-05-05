@@ -20,3 +20,8 @@ void SelectionBox::draw(EasyGraphics* g)
 {
 
 }
+
+void SelectionBox::update(Component* shp)
+{
+	this->setRect(shp->getRect());
+}

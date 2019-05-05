@@ -363,11 +363,24 @@ void EasyGraphics::drawDotLine(int x1, int y1, int x2, int y2)
 	bool draw = true;
 	if (x1 == x2) {
 		while (y1 < y2) {
-
+			if (draw) {
+				::MoveToEx(hdcback, x1, y1, NULL);
+				::LineTo(hdcback, x2, y2);
+			}
+			draw = !draw;
+			y1 += 5;
 		}
 	}
 	else if (y1 == y2) {
 
+		while (x1 < x2) {
+			if (draw) {
+				::MoveToEx(hdcback, x1, y1, NULL);
+				::LineTo(hdcback, x2, y2);
+			}
+			draw = !draw;
+			x1 += 5;
+		}
 	}
 	else {
 

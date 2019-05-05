@@ -20,12 +20,14 @@ void Application::onCreate() {
 void Application::onDestroy()
 {
 	for (Component* shp : Canvas) {
+		shp->onDelete();
 		delete shp;
 	}
 	for (Component* comp : HUD) {
 		delete comp;
 	}
 	delete currentShape;
+	delete selectionBox;
 	removeProp();
 	EasyGraphics::onDestroy();
 }
@@ -33,9 +35,9 @@ void Application::onDestroy()
 void Application::createHUD() {
 	for (int i = 0; i < 13; i++) {
 		int size = 60;
-		Rect r = { (i*(size + 1)) + 1,1,size,size };
+		Rect r = { (i * (size + 1)) + 1,1,size,size };
 		Button* btn = nullptr;
-		
+
 		switch (i) {
 		case PENCIL: btn = new Button(r, L"imgs/imgPencilButton.bmp", &PencilClick); break;
 		case LINE: btn = new Button(r, L"imgs/imgLineButton.bmp", &LineClick); break;
@@ -52,8 +54,10 @@ void Application::createHUD() {
 		case HELP: btn = new Button(r, L"imgs/imgHelpButton.bmp", &HelpClick, true); break;
 		default: break;
 		}
-		btn->setButtonType((ButtonType)i);
-		HUD.push_back(btn);
+		if (btn) {
+			btn->setButtonType((ButtonType)i);
+			HUD.push_back(btn);
+		}
 	}
 }
 
@@ -79,11 +83,12 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 				Rect r = { x,y,0,0 };
 				switch (shp->getStatus()) {
 				case NEW:
-					shp->setRectangle(r);
+					shp->setRect(r);
 					Canvas.push_back(shp);
 					break;
 				case REMOVE:
 					Canvas.remove(shp);
+					delete shp;
 					shp = nullptr;
 					break;
 				default:
@@ -112,7 +117,8 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 
 void Application::onLButtonUp(UINT nFlags, int x, int y)
 {
-	currentShape = nullptr;
+	if(currentShape)
+		currentShape = nullptr;
 }
 
 void Application::onMouseMove(UINT nFlags, int x, int y)
@@ -124,10 +130,7 @@ void Application::onMouseMove(UINT nFlags, int x, int y)
 				shp->addPoint(x, y);
 			}
 			else {
-				Rect r = currentShape->getRectangle();
-				r.w = x - r.x;
-				r.h = y - r.y;
-				currentShape->setRectangle(r);
+				currentShape->updateShape(x,y);
 			}
 			break;
 		case MOVE:
@@ -135,6 +138,8 @@ void Application::onMouseMove(UINT nFlags, int x, int y)
 			currentShape->movePos(x - old.x, y - old.y);
 			break;
 		}
+		
+		dynamic_cast<SelectionBox*>(selectionBox)->update(currentShape);
 		onDraw();
 		p->setMousePos(x, y);
 	}

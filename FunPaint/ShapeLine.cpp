@@ -4,6 +4,7 @@
 
 ShapeLine::ShapeLine(int penCol, int backCol) : Shape( penCol, backCol)
 {
+
 }
 
 
@@ -15,7 +16,20 @@ void ShapeLine::draw(EasyGraphics * g)
 {
 	Rect r = this->rectangle;
 	g->setPenColour(this->penColour, 3);
-	g->drawLine(r.x, r.y, r.x + r.w, r.y + r.h);
+	g->drawLine(x1, y1, x2, y2);
 
 }
 
+void ShapeLine::updateShape(int x, int y)
+{
+	x2 = x;
+	y2 = y;
+}
+
+void ShapeLine::setRect(Rect r)
+{
+	x1 = r.x;
+	x2 = r.x;
+	y1 = r.y;
+	y2 = r.y;
+}
