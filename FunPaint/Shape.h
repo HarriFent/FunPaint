@@ -9,8 +9,8 @@ public:
 	Shape(int penCol, int backCol) : Component(Rect{0,0,0,0}), penColour(penCol), backColour(backCol), status(NEW) {};
 	~Shape() {};
 
-	/*int getBackColour() { return backColour; }
-	int getPenColour() { return penColour; }*/
+	int getBackColour() { return backColour; }
+	int getPenColour() { return penColour; }
 
 	void setBackColour(int backCol) { backColour = backCol; }
 	void setPenColour(int penCol) { penColour = penCol; }

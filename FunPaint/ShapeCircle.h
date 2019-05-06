@@ -8,5 +8,6 @@ public:
 	~ShapeCircle();
 
 	virtual void draw(EasyGraphics* g);
+	virtual boolean hitTest(int x, int y);
 };
 

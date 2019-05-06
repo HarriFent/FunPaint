@@ -28,12 +28,16 @@ Shape* CircleClick(Shape* shp) {
 }
 Shape* ColourClick(Shape* shp) {
 	//OutputDebugStringA("COLOUR\n");
+	p->setActive(false);
 	p->setPenColour(getColourDialog(p->getPenColour()));
+	p->setActive(true);
 	return shp;
 }
 Shape* ColourRClick(Shape* shp) {
 	//OutputDebugStringA("COLOUR\n");
+	p->setActive(false);
 	p->setBackColour(getColourDialog(p->getBackColour()));
+	p->setActive(true);
 	return shp;
 }
 Shape* FillClick(Shape* shp) {
@@ -54,24 +58,21 @@ Shape* TransformClick(Shape* shp) {
 	if (shp) shp->setStatus(MOVE);
 	return shp;
 }
-Shape* ImportImageClick(Shape* shp) {
 
-	InputBox input;
-//	input.create(hInstance, 900, 600, 40, true);
-	BrowseFolder("");
-	OutputDebugStringA("IMPORTIMAGE\n");
-	return shp;
-}
-Shape* ExportImageClick(Shape* shp) {
-	OutputDebugStringA("EXPORTIMAGE\n");
+Shape* PickerClick(Shape* shp) {
+	p->setBackColour(shp->getBackColour());
+	p->setPenColour(shp->getPenColour());
+	shp->setStatus(DEFAULT);
 	return shp;
 }
 Shape* SaveClick(Shape* shp) {
 	OutputDebugStringA("SAVE\n");
+
 	return shp;
 }
 Shape* LoadClick(Shape* shp) {
 	OutputDebugStringA("LOAD\n");
+
 	return shp;
 }
 Shape* HelpClick(Shape* shp) {

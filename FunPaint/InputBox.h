@@ -1,7 +1,6 @@
 #pragma once
-#include "EasyGraphics.h"
-class InputBox :
-	public EasyGraphics
+
+class InputBox 
 {
 public:
 	InputBox();

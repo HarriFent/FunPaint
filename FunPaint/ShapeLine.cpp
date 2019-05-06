@@ -58,9 +58,9 @@ void ShapeLine::movePos(int dx, int dy) {
 	y2 += dy;
 }
 
-void ShapeLine::scale(int dx, int dy)
+void ShapeLine::scale(int dx, int dy, CornerPos pos)
 {
-
+	
 }
 
 double ShapeLine::findDistance(int m, int n, int x1, int y1, int x2, int y2)

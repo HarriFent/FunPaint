@@ -33,7 +33,7 @@ void Application::onDestroy()
 }
 
 void Application::createHUD() {
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; i < 12; i++) {
 		int size = 60;
 		Rect r = { (i * (size + 1)) + 1,1,size,size };
 		Button* btn = nullptr;
@@ -47,8 +47,7 @@ void Application::createHUD() {
 		case FILL: btn = new Button(r, L"imgs/imgFillButton.bmp", &FillClick); break;
 		case ERASER: btn = new Button(r, L"imgs/imgEraserButton.bmp", &EraserClick); break;
 		case TRANSFORM: btn = new Button(r, L"imgs/imgTransformButton.bmp", &TransformClick); break;
-		case IMPORTIMAGE: btn = new Button(r, L"imgs/imgImportButton.bmp", &ImportImageClick, true); break;
-		case EXPORTIMAGE: btn = new Button(r, L"imgs/imgExportButton.bmp", &ExportImageClick, true); break;
+		case PICKER: btn = new Button(r, L"imgs/imgPickerButton.bmp", &PickerClick); break;
 		case SAVE: btn = new Button(r, L"imgs/imgSaveButton.bmp", &SaveClick, true); break;
 		case LOAD: btn = new Button(r, L"imgs/imgLoadButton.bmp", &LoadClick, true); break;
 		case HELP: btn = new Button(r, L"imgs/imgHelpButton.bmp", &HelpClick, true); break;
@@ -75,9 +74,9 @@ void Application::onDraw() {
 
 void Application::onLButtonDown(UINT nFlags, int x, int y) {
 	p->setMousePos(x, y);
-	if (y > 60) {
+	if (y > 60 && p->getActive()) {
 		if (!selectionBox->hitTest(x, y))
-				currentShape = nullptr;
+			currentShape = nullptr;
 		if (selectionBox && currentShape) {
 			currentShape = p->runAction(currentShape);
 			selectionBox->update(currentShape);
@@ -111,27 +110,29 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 		}
 	}
 	else {
-		for (it = HUD.begin(); it != HUD.end(); it++) {
-			if ((*it)->hitTest(x, y)) {
-				if (Button* button = dynamic_cast<Button*>(*it)) {
-					if (button != getSelectedButton()) {
-						resetButtons();
+		if (p->getActive()) {
+			for (it = HUD.begin(); it != HUD.end(); it++) {
+				if ((*it)->hitTest(x, y)) {
+					if (Button * button = dynamic_cast<Button*>(*it)) {
+						if (button != getSelectedButton()) {
+							resetButtons();
+						}
+						button->onClick(x, y);
 					}
-					button->onClick(x,y);
 				}
 			}
 		}
 	}
 	onDraw();
-
 }
 
 void Application::onLButtonUp(UINT nFlags, int x, int y)
 {
-	if(currentShape)
+	if (currentShape && p->getActive())
 		switch (currentShape->getStatus()) {
 		case NEW:
-			if (ShapeLine * shp = dynamic_cast<ShapeLine*>(currentShape)) {}else {
+			if (ShapeLine * shp = dynamic_cast<ShapeLine*>(currentShape)) {}
+			else {
 				currentShape->setRect(currentShape->getResetRect());
 			}
 			currentShape = nullptr;
@@ -147,7 +148,7 @@ void Application::onLButtonUp(UINT nFlags, int x, int y)
 
 void Application::onMouseMove(UINT nFlags, int x, int y)
 {
-	if (currentShape) {
+	if (currentShape && p->getActive()) {
 		Point old = p->getMousePos();
 		switch (currentShape->getStatus()) {
 		case NEW:
@@ -178,17 +179,19 @@ void Application::onMouseMove(UINT nFlags, int x, int y)
 
 void Application::onRButtonDown(UINT nFlags, int x, int y)
 {
-	for (it = HUD.begin(); it != HUD.end(); it++) {
-		if ((*it)->hitTest(x, y)) {
-			if (Button* button = dynamic_cast<Button*>(*it)) {
-				if (button->getButtonType() == COLOUR) {
-					if (button != getSelectedButton()) {
-						resetButtons();
+	if (p->getActive()) {
+		for (it = HUD.begin(); it != HUD.end(); it++) {
+			if ((*it)->hitTest(x, y)) {
+				if (Button * button = dynamic_cast<Button*>(*it)) {
+					if (button->getButtonType() == COLOUR) {
+						if (button != getSelectedButton()) {
+							resetButtons();
+						}
+						button->setClickAction(&ColourRClick);
+						button->onClick(x, y);
+						button->setClickAction(&ColourClick);
+						onDraw();
 					}
-					button->setClickAction(&ColourRClick);
-					button->onClick(x, y);
-					button->setClickAction(&ColourClick);
-					onDraw();
 				}
 			}
 		}

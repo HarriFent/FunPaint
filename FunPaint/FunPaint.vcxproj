@@ -180,14 +180,12 @@
     <Image Include="imgCircleButton.bmp" />
     <Image Include="imgColourButton.bmp" />
     <Image Include="imgEraserButton.bmp" />
-    <Image Include="imgExitButton.bmp" />
-    <Image Include="imgExportButton.bmp" />
     <Image Include="imgFillButton.bmp" />
     <Image Include="imgHelpButton.bmp" />
-    <Image Include="imgImportButton.bmp" />
     <Image Include="imgLineButton.bmp" />
     <Image Include="imgLoadButton.bmp" />
     <Image Include="imgPencilButton.bmp" />
+    <Image Include="imgPickerButton.bmp" />
     <Image Include="imgRectangleButton.bmp" />
     <Image Include="imgSaveButton.bmp" />
     <Image Include="imgTransformButton.bmp" />

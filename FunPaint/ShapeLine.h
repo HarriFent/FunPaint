@@ -14,7 +14,7 @@ public:
 	virtual boolean hitTest(int x, int y);
 	virtual void movePos(int dx, int dy);
 
-	void scale(int dx, int dy);
+	void scale(int dx, int dy, CornerPos pos);
 
 private:
 	double findDistance(int m, int n, int x1, int y1, int x2, int y2);

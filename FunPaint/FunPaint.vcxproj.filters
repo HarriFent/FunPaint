@@ -124,19 +124,10 @@
     <Image Include="imgEraserButton.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="imgExitButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgExportButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="imgFillButton.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgHelpButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgImportButton.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgLineButton.bmp">
@@ -155,6 +146,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="imgTransformButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgPickerButton.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
