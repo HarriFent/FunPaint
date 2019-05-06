@@ -1,6 +1,5 @@
 #pragma once
 
-#include <list>
 #include "EasyGraphics.h"
 #include "Component.h"
 #include "Button.h"
@@ -25,9 +24,8 @@ private:
 	void resetButtons();
 	Component* findObjFromClick(int x, int y);
 
-	std::list<Component*> HUD;
-	std::list<Component*> Canvas;
-	std::list<Component*>::iterator it;
+	std::vector<Component*> HUD;
+	std::vector<Component*>::iterator it;
 
 	Properties* p = Properties::getProperties();
 

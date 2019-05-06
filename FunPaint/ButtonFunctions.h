@@ -72,7 +72,7 @@ Shape* SaveClick(Shape* shp) {
 }
 Shape* LoadClick(Shape* shp) {
 	OutputDebugStringA("LOAD\n");
-
+	p->SaveCanvas();
 	return shp;
 }
 Shape* HelpClick(Shape* shp) {

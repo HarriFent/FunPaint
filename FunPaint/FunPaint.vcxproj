@@ -157,6 +157,10 @@
     <ClCompile Include="ShapeLine.cpp" />
     <ClCompile Include="ShapePencil.cpp" />
     <ClCompile Include="ShapeRectangle.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -175,20 +179,23 @@
     <ClInclude Include="ShapeLine.h" />
     <ClInclude Include="ShapePencil.h" />
     <ClInclude Include="ShapeRectangle.h" />
+    <ClInclude Include="tinystr.h" />
+    <ClInclude Include="tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="imgCircleButton.bmp" />
-    <Image Include="imgColourButton.bmp" />
-    <Image Include="imgEraserButton.bmp" />
-    <Image Include="imgFillButton.bmp" />
-    <Image Include="imgHelpButton.bmp" />
-    <Image Include="imgLineButton.bmp" />
-    <Image Include="imgLoadButton.bmp" />
-    <Image Include="imgPencilButton.bmp" />
     <Image Include="imgPickerButton.bmp" />
-    <Image Include="imgRectangleButton.bmp" />
-    <Image Include="imgSaveButton.bmp" />
-    <Image Include="imgTransformButton.bmp" />
+    <Image Include="imgs\imgCircleButton.bmp" />
+    <Image Include="imgs\imgColourButton.bmp" />
+    <Image Include="imgs\imgEraserButton.bmp" />
+    <Image Include="imgs\imgExitButton.bmp" />
+    <Image Include="imgs\imgFillButton.bmp" />
+    <Image Include="imgs\imgHelpButton.bmp" />
+    <Image Include="imgs\imgLineButton.bmp" />
+    <Image Include="imgs\imgLoadButton.bmp" />
+    <Image Include="imgs\imgPencilButton.bmp" />
+    <Image Include="imgs\imgRectangleButton.bmp" />
+    <Image Include="imgs\imgSaveButton.bmp" />
+    <Image Include="imgs\imgTransformButton.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

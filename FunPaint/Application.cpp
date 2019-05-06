@@ -19,9 +19,6 @@ void Application::onCreate() {
 
 void Application::onDestroy()
 {
-	for (Component* shp : Canvas) {
-		delete shp;
-	}
 	for (Component* comp : HUD) {
 		delete comp;
 	}
@@ -62,8 +59,7 @@ void Application::createHUD() {
 
 void Application::onDraw() {
 	this->clrscr(clWhite);
-	for (Component* shp : Canvas)
-		shp->draw(this);
+	p->drawCanvas(this);
 	for (Component* comp : HUD)
 		comp->draw(this);
 	if (currentShape)
@@ -92,10 +88,10 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 					switch (shp->getStatus()) {
 					case NEW:
 						shp->setRect(r);
-						Canvas.push_back(shp);
+						p->addShape(shp);
 						break;
 					case REMOVE:
-						Canvas.remove(shp);
+						p->deleteShape(shp);
 						delete shp;
 						shp = nullptr;
 						break;
@@ -201,7 +197,7 @@ void Application::onRButtonDown(UINT nFlags, int x, int y)
 
 
 Button* Application::getSelectedButton() {
-	std::list<Component*>::iterator select;
+	std::vector<Component*>::iterator select;
 	for (select = HUD.begin(); select != HUD.end(); select++)
 		if (Button* object = dynamic_cast<Button*>(*select))
 			if (object->isSelected())
@@ -211,16 +207,16 @@ Button* Application::getSelectedButton() {
 
 
 void Application::resetButtons() {
-	std::list<Component*>::iterator reset;
+	std::vector<Component*>::iterator reset;
 	for (reset = HUD.begin(); reset != HUD.end(); reset++)
 		if (Button* object = dynamic_cast<Button*>(*reset))
 			object->reset();
 }
 
 Component* Application::findObjFromClick(int x, int y) {
-	std::list<Component*>::iterator shpit;
+	std::vector<Component*>::iterator shpit;
 	Component* c = nullptr;
-	for (shpit = Canvas.begin(); shpit != Canvas.end(); shpit++) {
+	for (shpit = p->getCanvasBegin(); shpit != p->getCanvasEnd(); shpit++) {
 		if ((*shpit)->hitTest(x, y)) {
 			c = (*shpit);
 		}

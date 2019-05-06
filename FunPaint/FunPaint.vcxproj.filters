@@ -63,6 +63,18 @@
     <ClCompile Include="InputBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tinystr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlerror.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxmlparser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -113,42 +125,51 @@
     <ClInclude Include="InputBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tinystr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="imgCircleButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgColourButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgEraserButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgFillButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgHelpButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgLineButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgLoadButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgPencilButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgRectangleButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgSaveButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="imgTransformButton.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="imgPickerButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgPencilButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgRectangleButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgSaveButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgTransformButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgCircleButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgColourButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgEraserButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgExitButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgFillButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgHelpButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgLineButton.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="imgs\imgLoadButton.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
