@@ -1,6 +1,9 @@
 #include "Properties.h"
 #include <cstdlib> 
 #include "tinyxml.h"
+#include "ShapeLine.h"
+#include "ShapeRectangle.h"
+#include "ShapeCircle.h"
 
 void Properties::drawCanvas(EasyGraphics* g)
 {
@@ -21,52 +24,55 @@ void Properties::deleteShape(Shape* shp)
 void Properties::SaveCanvas()
 {
 	TiXmlDocument doc;
-	TiXmlElement* msg;
 	TiXmlDeclaration* decl = new TiXmlDeclaration("1.0", "", "");
 	doc.LinkEndChild(decl);
 
-	TiXmlElement* root = new TiXmlElement("MyApp");
+	TiXmlElement* root = new TiXmlElement("Shapes");
 	doc.LinkEndChild(root);
 
-	TiXmlComment* comment = new TiXmlComment();
-	comment->SetValue(" Settings for MyApp ");
-	root->LinkEndChild(comment);
+	for (Component* comp : Canvas) {
+		Shape* shp = dynamic_cast<Shape*>(comp);
+		TiXmlElement* shape;
+		shape = new TiXmlElement("Shape");
+		root->LinkEndChild(shape);
+		if (ShapeLine* line = dynamic_cast<ShapeLine*>(shp)) {
+			shape->SetAttribute("type", "Line");
+			shape->SetAttribute("x1", line->getPoint1().x);
+			shape->SetAttribute("y1", line->getPoint1().y);
+			shape->SetAttribute("x2", line->getPoint2().x);
+			shape->SetAttribute("y2", line->getPoint2().y);
+		}
+		else if (ShapeRectangle* r = dynamic_cast<ShapeRectangle*>(shp)) {
+			shape->SetAttribute("type", "Rectangle");
+			shape->SetAttribute("x", r->getRect().x);
+			shape->SetAttribute("y", r->getRect().y);
+			shape->SetAttribute("w", r->getRect().w);
+			shape->SetAttribute("h", r->getRect().h);
+		}
+		else if (ShapeCircle* c = dynamic_cast<ShapeCircle*>(shp)) {
+			shape->SetAttribute("type", "Circle");
+			shape->SetAttribute("x", c->getRect().x);
+			shape->SetAttribute("y", c->getRect().y);
+			shape->SetAttribute("w", c->getRect().w);
+			shape->SetAttribute("h", c->getRect().h);
+		}
+		shape->SetAttribute("PenColour", shp->getPenColour());
+		shape->SetAttribute("BackColour", shp->getBackColour());
+	}
 
-	TiXmlElement* msgs = new TiXmlElement("Messages");
-	root->LinkEndChild(msgs);
-
-	msg = new TiXmlElement("Welcome");
-	msg->LinkEndChild(new TiXmlText("Welcome to MyApp"));
-	msgs->LinkEndChild(msg);
-
-	msg = new TiXmlElement("Farewell");
-	msg->LinkEndChild(new TiXmlText("Thank you for using MyApp"));
-	msgs->LinkEndChild(msg);
-
-	TiXmlElement* windows = new TiXmlElement("Windows");
-	root->LinkEndChild(windows);
-
-	TiXmlElement* window;
-	window = new TiXmlElement("Window");
-	windows->LinkEndChild(window);
-	window->SetAttribute("name", "MainFrame");
-	window->SetAttribute("x", 5);
-	window->SetAttribute("y", 15);
-	window->SetAttribute("w", 400);
-	window->SetAttribute("h", 250);
-
-	TiXmlElement* cxn = new TiXmlElement("Connection");
-	root->LinkEndChild(cxn);
-	cxn->SetAttribute("ip", "192.168.0.1");
-	cxn->SetDoubleAttribute("timeout", 123.456); // floating point attrib
-
-	//dump_to_stdout(&doc);
-	doc.SaveFile("appsettings.xml");
+	doc.SaveFile("Save1.xml");
 }
 
 void Properties::LoadCanvas()
 {
+	TiXmlDocument doc("Save1.xml");
+	bool loaded = doc.LoadFile();
+	if (loaded) {
 
+	}
+	else {
+		OutputDebugStringA("Could not find saved file.\n");
+	}
 }
 
 Properties::Properties()

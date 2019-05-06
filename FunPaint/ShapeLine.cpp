@@ -48,7 +48,8 @@ Rect ShapeLine::getResetRect()
 boolean ShapeLine::hitTest(int x, int y)
 {
 	double distance = findDistance(x,y,x1,y1,x2,y2);
-	return distance < 10;
+	Rect r = getResetRect();
+	return (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h && distance < 10);
 }
 
 void ShapeLine::movePos(int dx, int dy) {
@@ -56,11 +57,20 @@ void ShapeLine::movePos(int dx, int dy) {
 	x2 += dx;
 	y1 += dy;
 	y2 += dy;
+	rectangle = { x1,y1,x2 - x1,y2 - y1 };
 }
 
 void ShapeLine::scale(int dx, int dy, CornerPos pos)
 {
-	
+	if (pos == TOP_RIGHT) {
+		x1 += dx;
+		y1 += dy;
+	}
+	else {
+		x2 += dx;
+		y2 += dy;
+	}
+	rectangle = { x1,y1,x2 - x1,y2 - y1 };
 }
 
 double ShapeLine::findDistance(int m, int n, int x1, int y1, int x2, int y2)

@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<Shapes>
+    <Shape type="Rectangle" x="199" y="111" w="138" h="166" PenColour="0" BackColour="16777215" />
+    <Shape type="Circle" x="393" y="183" w="192" h="141" PenColour="0" BackColour="16777215" />
+</Shapes>

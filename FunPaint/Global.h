@@ -80,5 +80,6 @@ enum ShapeStatus {
 	NEW,
 	REMOVE,
 	MOVE,
-	SCALE
+	SCALE,
+	INVISIBLE
 };

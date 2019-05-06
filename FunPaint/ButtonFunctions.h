@@ -66,13 +66,11 @@ Shape* PickerClick(Shape* shp) {
 	return shp;
 }
 Shape* SaveClick(Shape* shp) {
-	OutputDebugStringA("SAVE\n");
-
+	p->SaveCanvas();
 	return shp;
 }
 Shape* LoadClick(Shape* shp) {
-	OutputDebugStringA("LOAD\n");
-	p->SaveCanvas();
+	p->LoadCanvas();
 	return shp;
 }
 Shape* HelpClick(Shape* shp) {

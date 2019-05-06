@@ -11,6 +11,9 @@ public:
 	void setRect(Rect r);
 	Rect getResetRect();
 
+	Point getPoint1() { return Point{ x1,y1 }; }
+	Point getPoint2() { return Point{ x2,y2 }; }
+
 	virtual boolean hitTest(int x, int y);
 	virtual void movePos(int dx, int dy);
 

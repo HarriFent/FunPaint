@@ -7,10 +7,7 @@ Component::~Component()
 
 boolean Component::hitTest(int x, int y) {
 	Rect r = this->getResetRect();
-	if (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h) {
-		return true;
-	}
-	return false;
+	return (x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h);
 }
 
 

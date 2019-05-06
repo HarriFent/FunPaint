@@ -1,4 +1,5 @@
 #include "SelectionBox.h"
+#include "ShapeLine.h"
 
 
 
@@ -37,7 +38,8 @@ void SelectionBox::draw(EasyGraphics* g)
 	g->drawLine(r.x + r.w, r.y, r.x + r.w, r.y + r.h);
 	g->drawLine(r.x, r.y + r.h, r.x + r.w, r.y + r.h);
 	for (ShapeRectangle* btn : btns) {
-		btn->draw(g);
+		if (btn->getStatus() != INVISIBLE)
+			btn->draw(g);
 	}
 }
 
@@ -48,13 +50,29 @@ void SelectionBox::update(Component* shp)
 		Rect r = shp->getResetRect();
 		r += 5;
 		this->setRect(r);
-		for (int i = 0; i < 4; i++) {
-			ShapeRectangle* btn = btns.at(i);
-			switch (i) {
-			case 0:	btn->setRect({ r.x,r.y,10,10 }); break;
-			case 1:	btn->setRect({ r.x, r.y + r.h - 10,10,10 }); break;
-			case 2:	btn->setRect({ r.x + r.w - 10,r.y,10,10 }); break;
-			case 3:	btn->setRect({ r.x + r.w - 10,r.y + r.h - 10,10,10 }); break;
+
+		if (dynamic_cast<ShapeLine*>(shp)) {
+			for (int i = 0; i < 4; i++) {
+				ShapeRectangle* btn = btns.at(i);
+				r = shp->getRect();
+				switch (i) {
+				case 0:	btn->setRect({ r.x-5,r.y-5,10,10 }); break;
+				case 1:	btn->setRect({ r.x + r.w-5, r.y + r.h-5,10,10 }); break;
+				case 2:	btn->setStatus(INVISIBLE); break;
+				case 3:	btn->setStatus(INVISIBLE); break;
+				}
+				
+			}
+		} else {
+			for (int i = 0; i < 4; i++) {
+				ShapeRectangle* btn = btns.at(i);
+				btn->setStatus(DEFAULT);
+				switch (i) {
+				case 0:	btn->setRect({ r.x,r.y,10,10 }); break;
+				case 1:	btn->setRect({ r.x, r.y + r.h - 10,10,10 }); break;
+				case 2:	btn->setRect({ r.x + r.w - 10,r.y,10,10 }); break;
+				case 3:	btn->setRect({ r.x + r.w - 10,r.y + r.h - 10,10,10 }); break;
+				}
 			}
 		}
 	}
