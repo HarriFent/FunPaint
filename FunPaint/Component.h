@@ -10,7 +10,7 @@ public:
 
 	virtual void draw(EasyGraphics* g) = 0;
 
-	boolean hitTest(int x, int y);
+	virtual boolean hitTest(int x, int y);
 	Rect getRect();
 	virtual Rect getResetRect();
 	virtual void setRect(Rect r) { rectangle = r; };

@@ -11,7 +11,14 @@ public:
 	void setRect(Rect r);
 	Rect getResetRect();
 
+	virtual boolean hitTest(int x, int y);
+	virtual void movePos(int dx, int dy);
+
+	void scale(int dx, int dy);
+
 private:
+	double findDistance(int m, int n, int x1, int y1, int x2, int y2);
+
 	int x1, y1, x2, y2;
 };
 

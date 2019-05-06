@@ -15,6 +15,7 @@
 
 
 int getColourDialog(int col);
+std::wstring BrowseFolder(std::string saved_path);
 
 const int PEN_WIDTH = 2;
 

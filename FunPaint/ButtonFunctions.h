@@ -1,10 +1,12 @@
 #pragma once
+#include <vector>
 #include "Global.h"
 #include "Shape.h"
 #include "ShapeRectangle.h"
 #include "ShapeLine.h"
 #include "ShapeCircle.h"
 #include "ShapePencil.h"
+#include "InputBox.h"
 
 Properties* p = Properties::getProperties();
 
@@ -53,6 +55,10 @@ Shape* TransformClick(Shape* shp) {
 	return shp;
 }
 Shape* ImportImageClick(Shape* shp) {
+
+	InputBox input;
+//	input.create(hInstance, 900, 600, 40, true);
+	BrowseFolder("");
 	OutputDebugStringA("IMPORTIMAGE\n");
 	return shp;
 }
