@@ -30,13 +30,12 @@ void Application::onDestroy()
 }
 
 void Application::createHUD() {
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < 11; i++) {
 		int size = 60;
 		Rect r = { (i * (size + 1)) + 1,1,size,size };
 		Button* btn = nullptr;
 
 		switch (i) {
-		case PENCIL: btn = new Button(r, L"imgs/imgPencilButton.bmp", &PencilClick); break;
 		case LINE: btn = new Button(r, L"imgs/imgLineButton.bmp", &LineClick); break;
 		case RECTANGLE:	btn = new Button(r, L"imgs/imgRectangleButton.bmp", &RectangleClick);	break;
 		case CIRCLE: btn = new Button(r, L"imgs/imgCircleButton.bmp", &CircleClick); break;
@@ -47,7 +46,7 @@ void Application::createHUD() {
 		case PICKER: btn = new Button(r, L"imgs/imgPickerButton.bmp", &PickerClick); break;
 		case SAVE: btn = new Button(r, L"imgs/imgSaveButton.bmp", &SaveClick, true); break;
 		case LOAD: btn = new Button(r, L"imgs/imgLoadButton.bmp", &LoadClick, true); break;
-		case HELP: btn = new Button(r, L"imgs/imgHelpButton.bmp", &HelpClick, true); break;
+		case HELP: btn = new Button(r, L"imgs/imgHelpButton.bmp", &HelpClick); break;
 		default: break;
 		}
 		if (btn) {
@@ -131,21 +130,13 @@ void Application::onMouseMove(UINT nFlags, int x, int y)
 		Point old = p->getMousePos();
 		switch (currentShape->getStatus()) {
 		case NEW:
-			if (ShapePencil* shp = dynamic_cast<ShapePencil*>(currentShape)) {
-				shp->addPoint(x, y);
-			}
-			else {
-				currentShape->updateShape(x,y);
-			}
+			currentShape->updateShape(x,y);
 			break;
 		case MOVE:
 			currentShape->movePos(x - old.x, y - old.y);
 			break;
 		case SCALE:
-			if (ShapePencil * shp = dynamic_cast<ShapePencil*>(currentShape)) {}
-			else {
-				currentShape->scale(x - old.x, y - old.y, selectionBox->getPosition());
-			}
+			currentShape->scale(x - old.x, y - old.y, selectionBox->getPosition());
 			break;
 		}
 		

@@ -45,9 +45,6 @@
     <ClCompile Include="ShapeCircle.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="ShapePencil.cpp">
-      <Filter>Source Files\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="ShapeRectangle.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
@@ -105,9 +102,6 @@
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeLine.h">
-      <Filter>Header Files\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapePencil.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRectangle.h">

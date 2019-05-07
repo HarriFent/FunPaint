@@ -5,7 +5,6 @@
 #include "ShapeRectangle.h"
 #include "ShapeLine.h"
 #include "ShapeCircle.h"
-#include "ShapePencil.h"
 #include "ShapeImage.h"
 
 
@@ -15,9 +14,6 @@ void removeProp() {
 	delete p;
 }
 
-Shape* PencilClick(Shape* shp) {
-	return new ShapePencil(p->getPenColour(), p->getBackColour());
-}
 Shape* LineClick(Shape* shp) {
 	shp = new ShapeLine(p->getPenColour(), p->getBackColour());
 	p->addShape(shp);
@@ -90,9 +86,7 @@ Shape* LoadClick(Shape* shp) {
 	return shp;
 }
 Shape* HelpClick(Shape* shp) {
-	OutputDebugStringA("HELP\n");
-	ShapeImage* img = new ShapeImage(L"imgs/help.bmp");
-	img->setRect({ 40,80,820,440 });
-	p->addShape(img);
+	//OutputDebugStringA("HELP\n");
+	
 	return shp;
 }

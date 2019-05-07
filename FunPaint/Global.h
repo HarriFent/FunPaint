@@ -60,7 +60,6 @@ enum CornerPos {
 };
 
 enum ButtonType {
-	PENCIL,
 	LINE,
 	RECTANGLE,
 	CIRCLE,

@@ -19,6 +19,8 @@ void Button::draw(EasyGraphics* g) {
 	if (selected) {
 		g->setPenColour(g->clRed, 3);
 		g->drawRectangle(r.x, r.y, r.w, r.h, false);
+		if (btnType == HELP) 
+			g->drawBitmap(L"imgs/help.bmp", 40, 80, 820, 352);
 	}
 }
 

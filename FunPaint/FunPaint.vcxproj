@@ -155,7 +155,6 @@
     <ClCompile Include="ShapeCircle.cpp" />
     <ClCompile Include="ShapeImage.cpp" />
     <ClCompile Include="ShapeLine.cpp" />
-    <ClCompile Include="ShapePencil.cpp" />
     <ClCompile Include="ShapeRectangle.cpp" />
     <ClCompile Include="tinystr.cpp" />
     <ClCompile Include="tinyxml.cpp" />
@@ -177,7 +176,6 @@
     <ClInclude Include="ShapeCircle.h" />
     <ClInclude Include="ShapeImage.h" />
     <ClInclude Include="ShapeLine.h" />
-    <ClInclude Include="ShapePencil.h" />
     <ClInclude Include="ShapeRectangle.h" />
     <ClInclude Include="tinystr.h" />
     <ClInclude Include="tinyxml.h" />
