@@ -14,6 +14,7 @@ public:
 	bool getActive() { return active; }
 	int getBackColour() { return backColour; }
 	int getPenColour() { return penColour; }
+	int getBGColour() { return bgColour; }
 	Point getMousePos() { return prevMousePos; }
 	std::vector<Component*>::iterator getCanvasBegin() { return Canvas.begin(); }
 	std::vector<Component*>::iterator getCanvasEnd() { return Canvas.end(); }
@@ -21,6 +22,7 @@ public:
 	void setActive(bool act) { active = act; }
 	void setBackColour(int backCol) { backColour = backCol; }
 	void setPenColour(int penCol) { penColour = penCol; }
+	void setBGColour(int bg) { bgColour = bg; }
 	void setMousePos(int x, int y) { prevMousePos = { x,y }; }
 	void addShape(Shape* shp) { Canvas.push_back(shp); }
 	void deleteShape(Shape* shp);
@@ -38,7 +40,8 @@ private:
 	Properties();
 	static Properties* prop;
 
-	int backColour = 0xffffff, penColour = 0x000000;
+	int backColour = 0x00ffffff, penColour = 0x00000000;
+	int bgColour = EasyGraphics::clWhite;
 
 	Point prevMousePos = {0,0};
 

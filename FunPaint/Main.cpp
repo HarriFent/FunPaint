@@ -7,7 +7,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 #ifdef _DEBUG
 	
 	//_CrtSetBreakAlloc(226);
-	_onexit(_CrtDumpMemoryLeaks);
+	//_onexit(_CrtDumpMemoryLeaks);
 #endif
 
 	Application app;

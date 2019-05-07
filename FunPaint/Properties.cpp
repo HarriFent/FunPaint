@@ -28,6 +28,7 @@ void Properties::SaveCanvas()
 
 	TiXmlElement* root = new TiXmlElement("Shapes");
 	doc.LinkEndChild(root);
+	root->SetAttribute("BGColor", this->bgColour);
 
 	for (Component* comp : Canvas) {
 		Shape* shp = dynamic_cast<Shape*>(comp);
@@ -61,7 +62,10 @@ void Properties::LoadCanvas()
 	bool loaded = doc.LoadFile();
 	if (loaded) {
 		TiXmlHandle docHandle(&doc);
-
+		TiXmlElement* can = docHandle.FirstChild("Shapes").ToElement();
+		int bgColor = EasyGraphics::clWhite;
+		can->QueryIntAttribute("BGColor", &bgColor);
+		this->setBGColour(bgColor);
 		TiXmlElement* shp = docHandle.FirstChild("Shapes").Child("Shape", 0).ToElement();
 
 		for (shp; shp; shp = shp->NextSiblingElement())

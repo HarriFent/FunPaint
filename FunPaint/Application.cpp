@@ -7,6 +7,8 @@
 Application::Application() {
 	this->setImmediateDrawMode(false);
 	createHUD();
+	p->setBGColour(clWhite);
+	p->LoadCanvas();
 }
 
 Application::~Application() {}
@@ -57,7 +59,7 @@ void Application::createHUD() {
 }
 
 void Application::onDraw() {
-	this->clrscr(clWhite);
+	this->clrscr(p->getBGColour());
 	p->drawCanvas(this);
 	for (Component* comp : HUD)
 		comp->draw(this);

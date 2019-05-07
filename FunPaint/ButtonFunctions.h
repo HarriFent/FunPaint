@@ -56,6 +56,9 @@ Shape* FillClick(Shape* shp) {
 		shp->setPenColour(p->getPenColour());
 		shp->setStatus(DEFAULT);
 	}
+	else {
+		p->setBGColour(p->getBackColour());
+	}
 	return shp;
 }
 Shape* EraserClick(Shape* shp) {

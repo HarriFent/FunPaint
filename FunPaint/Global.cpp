@@ -10,8 +10,7 @@ int getColourDialog(int col) {
 	//color.hwndOwner = this->getHWND();
 	color.lpCustColors = ccref;
 	color.rgbResult = col;
-	color.Flags = CC_RGBINIT;
-
+	color.Flags = CC_RGBINIT && CC_FULLOPEN;
 	if (ChooseColor(&color))
 	{
 		return color.rgbResult;
