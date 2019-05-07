@@ -56,8 +56,8 @@ void SelectionBox::update(Component* shp)
 				ShapeRectangle* btn = btns.at(i);
 				r = shp->getRect();
 				switch (i) {
-				case 0:	btn->setRect({ r.x-5,r.y-5,10,10 }); break;
-				case 1:	btn->setRect({ r.x + r.w-5, r.y + r.h-5,10,10 }); break;
+				case 0:	btn->setRect({ r.x-5, r.y-5,10,10 }); break;
+				case 1:	btn->setRect({ r.w-5, r.h-5,10,10 }); break;
 				case 2:	btn->setStatus(INVISIBLE); break;
 				case 3:	btn->setStatus(INVISIBLE); break;
 				}

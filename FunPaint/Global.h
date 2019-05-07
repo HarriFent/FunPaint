@@ -83,3 +83,4 @@ enum ShapeStatus {
 	SCALE,
 	INVISIBLE
 };
+

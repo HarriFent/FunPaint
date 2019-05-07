@@ -11,7 +11,7 @@ public:
 	virtual void draw(EasyGraphics* g) = 0;
 
 	virtual boolean hitTest(int x, int y);
-	Rect getRect();
+	virtual Rect getRect();
 	virtual Rect getResetRect();
 	virtual void setRect(Rect r) { rectangle = r; };
 

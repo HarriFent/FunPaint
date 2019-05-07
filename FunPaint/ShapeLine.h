@@ -10,6 +10,7 @@ public:
 	virtual void updateShape(int x, int y);
 	void setRect(Rect r);
 	Rect getResetRect();
+	Rect getRect();
 
 	Point getPoint1() { return Point{ x1,y1 }; }
 	Point getPoint2() { return Point{ x2,y2 }; }

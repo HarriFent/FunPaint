@@ -83,23 +83,6 @@ void Application::onLButtonDown(UINT nFlags, int x, int y) {
 
 			if (p->hasAction()) {
 				shp = p->runAction(shp);
-				if (shp) {
-					Rect r = { x,y,0,0 };
-					switch (shp->getStatus()) {
-					case NEW:
-						shp->setRect(r);
-						p->addShape(shp);
-						break;
-					case REMOVE:
-						p->deleteShape(shp);
-						delete shp;
-						shp = nullptr;
-						break;
-					default:
-						break;
-					}
-
-				}
 			}
 			currentShape = shp;
 			selectionBox->update(currentShape);

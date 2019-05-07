@@ -23,7 +23,7 @@
     <ProjectGuid>{CB478E9A-2029-4145-A759-DB8F7A805054}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>FunPaint</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -149,11 +149,11 @@
     <ClCompile Include="EasyGraphics.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="InputBox.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Properties.cpp" />
     <ClCompile Include="SelectionBox.cpp" />
     <ClCompile Include="ShapeCircle.cpp" />
+    <ClCompile Include="ShapeImage.cpp" />
     <ClCompile Include="ShapeLine.cpp" />
     <ClCompile Include="ShapePencil.cpp" />
     <ClCompile Include="ShapeRectangle.cpp" />
@@ -170,12 +170,12 @@
     <ClInclude Include="EasyGraphics.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="InputBox.h" />
     <ClInclude Include="Properties.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="SelectionBox.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeCircle.h" />
+    <ClInclude Include="ShapeImage.h" />
     <ClInclude Include="ShapeLine.h" />
     <ClInclude Include="ShapePencil.h" />
     <ClInclude Include="ShapeRectangle.h" />

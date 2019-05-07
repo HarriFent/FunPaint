@@ -1,6 +1,7 @@
 #pragma once
 #include "Global.h"
 #include "Shape.h"
+#include "tinyxml.h"
 
 class Properties
 {
@@ -31,6 +32,7 @@ public:
 
 	void SaveCanvas();
 	void LoadCanvas();
+	Rect getRectFromNode(TiXmlElement*);
 
 private:
 	Properties();

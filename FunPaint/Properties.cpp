@@ -1,6 +1,5 @@
 #include "Properties.h"
 #include <cstdlib> 
-#include "tinyxml.h"
 #include "ShapeLine.h"
 #include "ShapeRectangle.h"
 #include "ShapeCircle.h"
@@ -37,25 +36,17 @@ void Properties::SaveCanvas()
 		root->LinkEndChild(shape);
 		if (ShapeLine* line = dynamic_cast<ShapeLine*>(shp)) {
 			shape->SetAttribute("type", "Line");
-			shape->SetAttribute("x1", line->getPoint1().x);
-			shape->SetAttribute("y1", line->getPoint1().y);
-			shape->SetAttribute("x2", line->getPoint2().x);
-			shape->SetAttribute("y2", line->getPoint2().y);
 		}
 		else if (ShapeRectangle* r = dynamic_cast<ShapeRectangle*>(shp)) {
 			shape->SetAttribute("type", "Rectangle");
-			shape->SetAttribute("x", r->getRect().x);
-			shape->SetAttribute("y", r->getRect().y);
-			shape->SetAttribute("w", r->getRect().w);
-			shape->SetAttribute("h", r->getRect().h);
 		}
 		else if (ShapeCircle* c = dynamic_cast<ShapeCircle*>(shp)) {
 			shape->SetAttribute("type", "Circle");
-			shape->SetAttribute("x", c->getRect().x);
-			shape->SetAttribute("y", c->getRect().y);
-			shape->SetAttribute("w", c->getRect().w);
-			shape->SetAttribute("h", c->getRect().h);
 		}
+		shape->SetAttribute("x", shp->getRect().x);
+		shape->SetAttribute("y", shp->getRect().y);
+		shape->SetAttribute("w", shp->getRect().w);
+		shape->SetAttribute("h", shp->getRect().h);
 		shape->SetAttribute("PenColour", shp->getPenColour());
 		shape->SetAttribute("BackColour", shp->getBackColour());
 	}
@@ -65,14 +56,48 @@ void Properties::SaveCanvas()
 
 void Properties::LoadCanvas()
 {
+	Canvas.clear();
 	TiXmlDocument doc("Save1.xml");
 	bool loaded = doc.LoadFile();
 	if (loaded) {
+		TiXmlHandle docHandle(&doc);
 
+		TiXmlElement* shp = docHandle.FirstChild("Shapes").Child("Shape", 0).ToElement();
+
+		for (shp; shp; shp = shp->NextSiblingElement())
+		{
+			int penCol, backCol;
+			shp->QueryIntAttribute("PenColour", &penCol);
+			shp->QueryIntAttribute("BackColour", &backCol);
+
+			if (strcmp(shp->Attribute("type"), "Rectangle") == 0) {
+				Shape* newShp = new ShapeRectangle(penCol, backCol);
+				newShp->setRect(getRectFromNode(shp));
+				Canvas.push_back(newShp);
+			} else if (strcmp(shp->Attribute("type"), "Circle") == 0) {
+				Shape* newShp = new ShapeCircle(penCol, backCol);
+				newShp->setRect(getRectFromNode(shp));
+				Canvas.push_back(newShp);
+			} else if (strcmp(shp->Attribute("type"), "Line") == 0) {
+				Shape* newShp = new ShapeLine(penCol, backCol);
+				newShp->setRect(getRectFromNode(shp));
+				Canvas.push_back(newShp);
+			}
+		}
 	}
 	else {
 		OutputDebugStringA("Could not find saved file.\n");
 	}
+}
+
+Rect Properties::getRectFromNode(TiXmlElement* shp)
+{
+	int x, y, w, h;
+	shp->QueryIntAttribute("x", &x); // If this fails, original value is left as-is
+	shp->QueryIntAttribute("y", &y);
+	shp->QueryIntAttribute("w", &w);
+	shp->QueryIntAttribute("h", &h);
+	return Rect{ x,y,w,h };
 }
 
 Properties::Properties()

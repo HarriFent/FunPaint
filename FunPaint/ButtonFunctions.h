@@ -6,7 +6,8 @@
 #include "ShapeLine.h"
 #include "ShapeCircle.h"
 #include "ShapePencil.h"
-#include "InputBox.h"
+#include "ShapeImage.h"
+
 
 Properties* p = Properties::getProperties();
 
@@ -18,13 +19,25 @@ Shape* PencilClick(Shape* shp) {
 	return new ShapePencil(p->getPenColour(), p->getBackColour());
 }
 Shape* LineClick(Shape* shp) {
-	return new ShapeLine(p->getPenColour(), p->getBackColour());
+	shp = new ShapeLine(p->getPenColour(), p->getBackColour());
+	p->addShape(shp);
+	Point cood = p->getMousePos();
+	shp->setRect({ cood.x,cood.y,cood.x,cood.y });
+	return shp;
 }
 Shape* RectangleClick(Shape* shp) {
-	return new ShapeRectangle(p->getPenColour(), p->getBackColour());
+	shp = new ShapeRectangle(p->getPenColour(), p->getBackColour());
+	p->addShape(shp);
+	Point cood = p->getMousePos();
+	shp->setRect({ cood.x,cood.y,0,0 });
+	return shp;
 }
 Shape* CircleClick(Shape* shp) {
-	return new ShapeCircle(p->getPenColour(), p->getBackColour());
+	shp = new ShapeCircle(p->getPenColour(), p->getBackColour());
+	p->addShape(shp);
+	Point cood = p->getMousePos();
+	shp->setRect({cood.x,cood.y,0,0});
+	return shp;
 }
 Shape* ColourClick(Shape* shp) {
 	//OutputDebugStringA("COLOUR\n");
@@ -50,8 +63,11 @@ Shape* FillClick(Shape* shp) {
 	return shp;
 }
 Shape* EraserClick(Shape* shp) {
-	if (shp)
-		shp->setStatus(REMOVE);
+	if (shp) {
+		p->deleteShape(shp);
+		delete shp;
+		shp = nullptr;
+	}
 	return shp;
 }
 Shape* TransformClick(Shape* shp) {
@@ -75,5 +91,8 @@ Shape* LoadClick(Shape* shp) {
 }
 Shape* HelpClick(Shape* shp) {
 	OutputDebugStringA("HELP\n");
+	ShapeImage* img = new ShapeImage(L"imgs/help.bmp");
+	img->setRect({ 40,80,820,440 });
+	p->addShape(img);
 	return shp;
 }
